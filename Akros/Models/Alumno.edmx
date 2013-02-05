@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AkrosModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AkrosModelStoreContainer">
+          <EntitySet Name="Actividad" EntityType="AkrosModel.Store.Actividad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Alumno" EntityType="AkrosModel.Store.Alumno" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Concepto" EntityType="AkrosModel.Store.Concepto" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Egreso" EntityType="AkrosModel.Store.Egreso" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FormaPago" EntityType="AkrosModel.Store.FormaPago" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Grupo" EntityType="AkrosModel.Store.Grupo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ingreso" EntityType="AkrosModel.Store.Ingreso" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Alumno_Actividad" Association="AkrosModel.Store.FK_Alumno_Actividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumno_Grupo" Association="AkrosModel.Store.FK_Alumno_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egreso_Concepto" Association="AkrosModel.Store.FK_Egreso_Concepto">
+            <End Role="Concepto" EntitySet="Concepto" />
+            <End Role="Egreso" EntitySet="Egreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Actividad" Association="AkrosModel.Store.FK_Grupo_Actividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingreso_Actividad" Association="AkrosModel.Store.FK_Ingreso_Actividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingreso_Alumno" Association="AkrosModel.Store.FK_Ingreso_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingreso_FormaPago" Association="AkrosModel.Store.FK_Ingreso_FormaPago">
+            <End Role="FormaPago" EntitySet="FormaPago" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Actividad">
+          <Key>
+            <PropertyRef Name="Id_Actividad" />
+          </Key>
+          <Property Name="Id_Actividad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Detalle" Type="nchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Apellido" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="Id_Actividad" Type="int" Nullable="false" />
+          <Property Name="Id_Grupo" Type="int" Nullable="false" />
+          <Property Name="Cuota" Type="int" Nullable="false" />
+          <Property Name="Nacimiento" Type="date" Nullable="false" />
+          <Property Name="Domicilio" Type="nchar" MaxLength="60" />
+          <Property Name="Tel" Type="int" />
+          <Property Name="TelEmergencia" Type="int" />
+          <Property Name="Cel" Type="int" />
+          <Property Name="ObraSocial" Type="nchar" MaxLength="20" />
+          <Property Name="Mail" Type="nchar" MaxLength="30" />
+          <Property Name="Antecedentes" Type="bit" Nullable="false" />
+          <Property Name="AntOpcional" Type="nchar" MaxLength="40" />
+          <Property Name="Certificado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Concepto">
+          <Key>
+            <PropertyRef Name="Id_Concepto" />
+          </Key>
+          <Property Name="Id_Concepto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Detalle" Type="nchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Egreso">
+          <Key>
+            <PropertyRef Name="Id_Egreso" />
+          </Key>
+          <Property Name="Id_Egreso" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Concepto" Type="int" Nullable="false" />
+          <Property Name="Mes" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="Fecha_Egreso" Type="date" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormaPago">
+          <Key>
+            <PropertyRef Name="Id_Pago" />
+          </Key>
+          <Property Name="Id_Pago" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Detalles" Type="nchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="Id_Grupo" />
+          </Key>
+          <Property Name="Id_Grupo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Dias" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="Horario" Type="nchar" Nullable="false" MaxLength="100" />
+          <Property Name="Id_Actividad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingreso">
+          <Key>
+            <PropertyRef Name="Id_Ingreso" />
+          </Key>
+          <Property Name="Id_Ingreso" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Actividad" Type="int" Nullable="false" />
+          <Property Name="Mes" Type="nchar" MaxLength="20" />
+          <Property Name="Fecha_ingreso" Type="date" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="DNI" Type="int" />
+          <Property Name="Id_Pago" Type="int" Nullable="false" />
+          <Property Name="Observaciones" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Alumno_Actividad">
+          <End Role="Actividad" Type="AkrosModel.Store.Actividad" Multiplicity="1" />
+          <End Role="Alumno" Type="AkrosModel.Store.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id_Actividad" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="Id_Actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumno_Grupo">
+          <End Role="Grupo" Type="AkrosModel.Store.Grupo" Multiplicity="1" />
+          <End Role="Alumno" Type="AkrosModel.Store.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id_Grupo" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="Id_Grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egreso_Concepto">
+          <End Role="Concepto" Type="AkrosModel.Store.Concepto" Multiplicity="1" />
+          <End Role="Egreso" Type="AkrosModel.Store.Egreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concepto">
+              <PropertyRef Name="Id_Concepto" />
+            </Principal>
+            <Dependent Role="Egreso">
+              <PropertyRef Name="Id_Concepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Actividad">
+          <End Role="Actividad" Type="AkrosModel.Store.Actividad" Multiplicity="1" />
+          <End Role="Grupo" Type="AkrosModel.Store.Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id_Actividad" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="Id_Actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingreso_Actividad">
+          <End Role="Actividad" Type="AkrosModel.Store.Actividad" Multiplicity="1" />
+          <End Role="Ingreso" Type="AkrosModel.Store.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id_Actividad" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="Id_Actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingreso_Alumno">
+          <End Role="Alumno" Type="AkrosModel.Store.Alumno" Multiplicity="0..1" />
+          <End Role="Ingreso" Type="AkrosModel.Store.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingreso_FormaPago">
+          <End Role="FormaPago" Type="AkrosModel.Store.FormaPago" Multiplicity="1" />
+          <End Role="Ingreso" Type="AkrosModel.Store.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPago">
+              <PropertyRef Name="Id_Pago" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="Id_Pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AkrosModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AkrosEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actividad" EntityType="AkrosModel.Actividad" />
+          <EntitySet Name="Alumno" EntityType="AkrosModel.Alumno" />
+          <EntitySet Name="Concepto" EntityType="AkrosModel.Concepto" />
+          <EntitySet Name="Egreso" EntityType="AkrosModel.Egreso" />
+          <EntitySet Name="FormaPago" EntityType="AkrosModel.FormaPago" />
+          <EntitySet Name="Grupo" EntityType="AkrosModel.Grupo" />
+          <EntitySet Name="Ingreso" EntityType="AkrosModel.Ingreso" />
+          <AssociationSet Name="FK_Alumno_Actividad" Association="AkrosModel.FK_Alumno_Actividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingreso_Actividad" Association="AkrosModel.FK_Ingreso_Actividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumno_Grupo" Association="AkrosModel.FK_Alumno_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingreso_Alumno" Association="AkrosModel.FK_Ingreso_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egreso_Concepto" Association="AkrosModel.FK_Egreso_Concepto">
+            <End Role="Concepto" EntitySet="Concepto" />
+            <End Role="Egreso" EntitySet="Egreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingreso_FormaPago" Association="AkrosModel.FK_Ingreso_FormaPago">
+            <End Role="FormaPago" EntitySet="FormaPago" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Actividad" Association="AkrosModel.FK_Grupo_Actividad">
+            <End Role="Actividad" EntitySet="Actividad" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Actividad">
+          <Key>
+            <PropertyRef Name="Id_Actividad" />
+          </Key>
+          <Property Name="Id_Actividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detalle" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Alumno" Relationship="AkrosModel.FK_Alumno_Actividad" FromRole="Actividad" ToRole="Alumno" />
+          <NavigationProperty Name="Ingreso" Relationship="AkrosModel.FK_Ingreso_Actividad" FromRole="Actividad" ToRole="Ingreso" />
+          <NavigationProperty Name="Grupo" Relationship="AkrosModel.FK_Grupo_Actividad" FromRole="Actividad" ToRole="Grupo" />
+        </EntityType>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Id_Actividad" Type="Int32" Nullable="false" />
+          <Property Name="Id_Grupo" Type="Int32" Nullable="false" />
+          <Property Name="Cuota" Type="Int32" Nullable="false" />
+          <Property Name="Nacimiento" Type="DateTime" Nullable="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="60" Unicode="true" FixedLength="true" />
+          <Property Name="Tel" Type="Int32" />
+          <Property Name="TelEmergencia" Type="Int32" />
+          <Property Name="Cel" Type="Int32" />
+          <Property Name="ObraSocial" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Mail" Type="String" MaxLength="30" Unicode="true" FixedLength="true" />
+          <Property Name="Antecedentes" Type="Boolean" Nullable="false" />
+          <Property Name="AntOpcional" Type="String" MaxLength="40" Unicode="true" FixedLength="true" />
+          <Property Name="Certificado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Actividad" Relationship="AkrosModel.FK_Alumno_Actividad" FromRole="Alumno" ToRole="Actividad" />
+          <NavigationProperty Name="Grupo" Relationship="AkrosModel.FK_Alumno_Grupo" FromRole="Alumno" ToRole="Grupo" />
+          <NavigationProperty Name="Ingreso" Relationship="AkrosModel.FK_Ingreso_Alumno" FromRole="Alumno" ToRole="Ingreso" />
+        </EntityType>
+        <EntityType Name="Concepto">
+          <Key>
+            <PropertyRef Name="Id_Concepto" />
+          </Key>
+          <Property Name="Id_Concepto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detalle" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Egreso" Relationship="AkrosModel.FK_Egreso_Concepto" FromRole="Concepto" ToRole="Egreso" />
+        </EntityType>
+        <EntityType Name="Egreso">
+          <Key>
+            <PropertyRef Name="Id_Egreso" />
+          </Key>
+          <Property Name="Id_Egreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Concepto" Type="Int32" Nullable="false" />
+          <Property Name="Mes" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Fecha_Egreso" Type="DateTime" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Concepto" Relationship="AkrosModel.FK_Egreso_Concepto" FromRole="Egreso" ToRole="Concepto" />
+        </EntityType>
+        <EntityType Name="FormaPago">
+          <Key>
+            <PropertyRef Name="Id_Pago" />
+          </Key>
+          <Property Name="Id_Pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detalles" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Ingreso" Relationship="AkrosModel.FK_Ingreso_FormaPago" FromRole="FormaPago" ToRole="Ingreso" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="Id_Grupo" />
+          </Key>
+          <Property Name="Id_Grupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dias" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <Property Name="Horario" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Alumno" Relationship="AkrosModel.FK_Alumno_Grupo" FromRole="Grupo" ToRole="Alumno" />
+          <Property Type="Int32" Name="Id_Actividad" Nullable="false" />
+          <NavigationProperty Name="Actividad" Relationship="AkrosModel.FK_Grupo_Actividad" FromRole="Grupo" ToRole="Actividad" />
+        </EntityType>
+        <EntityType Name="Ingreso">
+          <Key>
+            <PropertyRef Name="Id_Ingreso" />
+          </Key>
+          <Property Name="Id_Ingreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Actividad" Type="Int32" Nullable="false" />
+          <Property Name="Mes" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Fecha_ingreso" Type="DateTime" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="DNI" Type="Int32" />
+          <Property Name="Id_Pago" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Actividad" Relationship="AkrosModel.FK_Ingreso_Actividad" FromRole="Ingreso" ToRole="Actividad" />
+          <NavigationProperty Name="Alumno" Relationship="AkrosModel.FK_Ingreso_Alumno" FromRole="Ingreso" ToRole="Alumno" />
+          <NavigationProperty Name="FormaPago" Relationship="AkrosModel.FK_Ingreso_FormaPago" FromRole="Ingreso" ToRole="FormaPago" />
+        </EntityType>
+        <Association Name="FK_Alumno_Actividad">
+          <End Role="Actividad" Type="AkrosModel.Actividad" Multiplicity="1" />
+          <End Role="Alumno" Type="AkrosModel.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id_Actividad" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="Id_Actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingreso_Actividad">
+          <End Role="Actividad" Type="AkrosModel.Actividad" Multiplicity="1" />
+          <End Role="Ingreso" Type="AkrosModel.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id_Actividad" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="Id_Actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumno_Grupo">
+          <End Role="Grupo" Type="AkrosModel.Grupo" Multiplicity="1" />
+          <End Role="Alumno" Type="AkrosModel.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id_Grupo" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="Id_Grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingreso_Alumno">
+          <End Role="Alumno" Type="AkrosModel.Alumno" Multiplicity="0..1" />
+          <End Role="Ingreso" Type="AkrosModel.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egreso_Concepto">
+          <End Role="Concepto" Type="AkrosModel.Concepto" Multiplicity="1" />
+          <End Role="Egreso" Type="AkrosModel.Egreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concepto">
+              <PropertyRef Name="Id_Concepto" />
+            </Principal>
+            <Dependent Role="Egreso">
+              <PropertyRef Name="Id_Concepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingreso_FormaPago">
+          <End Role="FormaPago" Type="AkrosModel.FormaPago" Multiplicity="1" />
+          <End Role="Ingreso" Type="AkrosModel.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPago">
+              <PropertyRef Name="Id_Pago" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="Id_Pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Actividad">
+          <End Type="AkrosModel.Actividad" Role="Actividad" Multiplicity="1" />
+          <End Type="AkrosModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividad">
+              <PropertyRef Name="Id_Actividad" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="Id_Actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AkrosModelStoreContainer" CdmEntityContainer="AkrosEntities6">
+          <EntitySetMapping Name="Actividad"><EntityTypeMapping TypeName="AkrosModel.Actividad"><MappingFragment StoreEntitySet="Actividad">
+            <ScalarProperty Name="Id_Actividad" ColumnName="Id_Actividad" />
+            <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Alumno"><EntityTypeMapping TypeName="AkrosModel.Alumno"><MappingFragment StoreEntitySet="Alumno">
+            <ScalarProperty Name="DNI" ColumnName="DNI" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+            <ScalarProperty Name="Id_Actividad" ColumnName="Id_Actividad" />
+            <ScalarProperty Name="Id_Grupo" ColumnName="Id_Grupo" />
+            <ScalarProperty Name="Cuota" ColumnName="Cuota" />
+            <ScalarProperty Name="Nacimiento" ColumnName="Nacimiento" />
+            <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+            <ScalarProperty Name="Tel" ColumnName="Tel" />
+            <ScalarProperty Name="TelEmergencia" ColumnName="TelEmergencia" />
+            <ScalarProperty Name="Cel" ColumnName="Cel" />
+            <ScalarProperty Name="ObraSocial" ColumnName="ObraSocial" />
+            <ScalarProperty Name="Mail" ColumnName="Mail" />
+            <ScalarProperty Name="Antecedentes" ColumnName="Antecedentes" />
+            <ScalarProperty Name="AntOpcional" ColumnName="AntOpcional" />
+            <ScalarProperty Name="Certificado" ColumnName="Certificado" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Concepto"><EntityTypeMapping TypeName="AkrosModel.Concepto"><MappingFragment StoreEntitySet="Concepto">
+            <ScalarProperty Name="Id_Concepto" ColumnName="Id_Concepto" />
+            <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Egreso"><EntityTypeMapping TypeName="AkrosModel.Egreso"><MappingFragment StoreEntitySet="Egreso">
+            <ScalarProperty Name="Id_Egreso" ColumnName="Id_Egreso" />
+            <ScalarProperty Name="Id_Concepto" ColumnName="Id_Concepto" />
+            <ScalarProperty Name="Mes" ColumnName="Mes" />
+            <ScalarProperty Name="Fecha_Egreso" ColumnName="Fecha_Egreso" />
+            <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="FormaPago"><EntityTypeMapping TypeName="AkrosModel.FormaPago"><MappingFragment StoreEntitySet="FormaPago">
+            <ScalarProperty Name="Id_Pago" ColumnName="Id_Pago" />
+            <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Grupo"><EntityTypeMapping TypeName="AkrosModel.Grupo"><MappingFragment StoreEntitySet="Grupo">
+            <ScalarProperty Name="Id_Actividad" ColumnName="Id_Actividad" />
+                <ScalarProperty Name="Id_Grupo" ColumnName="Id_Grupo" />
+            <ScalarProperty Name="Dias" ColumnName="Dias" />
+            <ScalarProperty Name="Horario" ColumnName="Horario" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Ingreso"><EntityTypeMapping TypeName="AkrosModel.Ingreso"><MappingFragment StoreEntitySet="Ingreso">
+            <ScalarProperty Name="Id_Ingreso" ColumnName="Id_Ingreso" />
+            <ScalarProperty Name="Id_Actividad" ColumnName="Id_Actividad" />
+            <ScalarProperty Name="Mes" ColumnName="Mes" />
+            <ScalarProperty Name="Fecha_ingreso" ColumnName="Fecha_ingreso" />
+            <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+            <ScalarProperty Name="DNI" ColumnName="DNI" />
+            <ScalarProperty Name="Id_Pago" ColumnName="Id_Pago" />
+            <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Alumno">
+        <EntityTypeShape EntityType="AkrosModel.Actividad" Width="1.5" PointX="0.75" PointY="3.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AkrosModel.Alumno" Width="1.5" PointX="3" PointY="2.25" Height="4.6725065104166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="AkrosModel.Concepto" Width="1.5" PointX="5.75" PointY="7.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AkrosModel.Egreso" Width="1.5" PointX="8" PointY="7.125" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AkrosModel.FormaPago" Width="1.5" PointX="3" PointY="8.875" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AkrosModel.Grupo" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="AkrosModel.Ingreso" Width="1.5" PointX="5.25" PointY="3.125" Height="3.1340950520833322" IsExpanded="true" />
+        <AssociationConnector Association="AkrosModel.FK_Alumno_Actividad" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.0105153574218741" />
+          <ConnectorPoint PointX="3" PointY="5.0105153574218741" />
+        </AssociationConnector>
+        <AssociationConnector Association="AkrosModel.FK_Ingreso_Actividad" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.3490056787109372" />
+          <ConnectorPoint PointX="2.75" PointY="4.3490056787109372" />
+          <ConnectorPoint PointX="2.75" PointY="2" />
+          <ConnectorPoint PointX="6" PointY="2" />
+          <ConnectorPoint PointX="6" PointY="3.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="AkrosModel.FK_Alumno_Grupo" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.5862939453125002" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="2.5862939453125" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="2.5862939453125002" />
+          <ConnectorPoint PointX="3" PointY="2.5862939453125002" />
+        </AssociationConnector>
+        <AssociationConnector Association="AkrosModel.FK_Ingreso_Alumno" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="4.6920475260416659" />
+          <ConnectorPoint PointX="5.25" PointY="4.6920475260416659" />
+        </AssociationConnector>
+        <AssociationConnector Association="AkrosModel.FK_Egreso_Concepto" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.25" PointY="8.297841796875" />
+          <ConnectorPoint PointX="8" PointY="8.297841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="AkrosModel.FK_Ingreso_FormaPago" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="9.81443359375" />
+          <ConnectorPoint PointX="5.46875" PointY="9.81443359375" />
+          <ConnectorPoint PointX="5.46875" PointY="6.2590950520833317" />
+        </AssociationConnector>
+        <AssociationConnector Association="AkrosModel.FK_Grupo_Actividad" >
+          <ConnectorPoint PointX="1.5" PointY="3.75" />
+          <ConnectorPoint PointX="1.5" PointY="2.922587890625" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
